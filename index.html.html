@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WAN Smart Manager</title>
+<style>
+:root{--bg:#0b1220;--panel:#111c2f;--panel2:#17253b;--line:#263952;--text:#eef5ff;--muted:#a9bad0;--green:#55d6a0;--cyan:#66c7f4;--amber:#ffd27a;--red:#ff8585}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,#18334a 0,#0b1220 42%,#080d17 100%);color:var(--text);min-height:100vh}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:10px 14px;background:var(--green);color:#062117;font-weight:700}button.secondary{background:#263952;color:var(--text);border:1px solid #38506d}button:hover{filter:brightness(1.08)}
+.app{max-width:1400px;margin:auto;padding:22px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,#55d6a0,#66c7f4);color:#082033;font-size:25px;font-weight:900}.brand h1{margin:0;font-size:clamp(22px,3vw,30px);letter-spacing:-.6px}.brand p{margin:5px 0 0;color:var(--muted);font-size:13px}.status{border:1px solid #2e715d;color:var(--green);background:#14372f;padding:8px 12px;border-radius:99px;font-size:12px;font-weight:700}
+.hero{padding:22px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(120deg,rgba(24,45,68,.95),rgba(16,28,47,.92));margin-bottom:18px}.hero h2{margin:0 0 8px;font-size:23px}.hero p{color:var(--muted);line-height:1.55;margin:0;max-width:850px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}.stat,.panel{background:rgba(17,28,47,.94);border:1px solid var(--line);border-radius:16px}.stat{padding:16px}.stat .label{color:var(--muted);font-size:12px}.stat .value{font-size:25px;font-weight:800;margin-top:8px}.stat .sub{color:var(--muted);font-size:11px;margin-top:5px}
+.tabs{display:flex;gap:8px;overflow:auto;padding:4px 0 12px;margin-bottom:4px}.tab{white-space:nowrap;background:#142239;color:var(--muted);border:1px solid var(--line);padding:10px 14px;border-radius:10px;font-weight:700}.tab.active{background:var(--green);color:#082117;border-color:var(--green)}
+.panel{padding:20px;margin-bottom:16px}.panel h3{margin:0 0 6px;font-size:18px}.desc{color:var(--muted);font-size:13px;line-height:1.5;margin:0 0 18px}.section{display:none}.section.active{display:block}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:12px;color:var(--muted);font-weight:700}.field input,.field select,.field textarea{width:100%;border:1px solid #344a65;background:#0b1526;color:var(--text);padding:11px;border-radius:10px;outline:none}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--cyan)}.field textarea{min-height:90px;resize:vertical}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+.result{margin-top:16px;border:1px solid #31516a;background:#0b1829;border-radius:12px;padding:15px;overflow:auto}.result h4{margin:0 0 10px;color:var(--green)}.result pre{white-space:pre-wrap;word-break:break-word;color:#d8e7f7;font:12px/1.6 Consolas,monospace;margin:0}.kv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.kv div{padding:12px;background:#142239;border:1px solid #293f59;border-radius:10px}.kv small{display:block;color:var(--muted);font-size:11px;margin-bottom:5px}.kv strong{font-size:14px;overflow-wrap:anywhere}
+.topology{min-height:180px;border:1px dashed #3b5674;border-radius:14px;background-color:#0d192a;background-image:radial-gradient(#38516b 1px,transparent 1px);background-size:18px 18px;padding:15px;display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap}.device{background:#172b43;border:1px solid #42617f;border-radius:12px;padding:12px;min-width:120px;text-align:center}.device .emoji{font-size:23px}.device strong{display:block;margin:5px 0;font-size:13px}.device small{color:var(--muted);font-size:11px}.linkline{color:var(--cyan);font-weight:800}.edge{display:flex;align-items:center;gap:7px;color:var(--cyan);font-size:12px;font-weight:800;flex-direction:column}.edge .line{width:38px;border-top:3px solid var(--cyan);height:1px}.edge small{color:var(--muted);font-weight:500}.empty{color:var(--muted);font-size:13px;text-align:center;padding:20px}
+.list{display:grid;gap:9px;margin-top:14px}.item{display:flex;justify-content:space-between;gap:12px;align-items:center;background:#142239;border:1px solid #293f59;border-radius:11px;padding:11px}.item span{font-size:13px}.item small{display:block;color:var(--muted);margin-top:4px}.remove{background:#40252e;color:#ffb9b9;padding:7px 10px}
+.notice{border-left:3px solid var(--amber);background:#322b1c;color:#ffe3a7;padding:12px;border-radius:8px;font-size:12px;line-height:1.5;margin-top:14px}.good{border-left-color:var(--green);background:#123329;color:#b9f5da}.assistant-answer{white-space:pre-wrap;line-height:1.6;color:#e1edf9;font-size:14px}.footer{text-align:center;color:#7288a3;font-size:11px;padding:18px 0 4px}
+@media(max-width:800px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.grid2{grid-template-columns:1fr}.app{padding:13px}.panel{padding:15px}}@media(max-width:480px){.formgrid{grid-template-columns:1fr}.stats{gap:8px}.stat{padding:12px}.stat .value{font-size:21px}.hero{padding:17px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="logo">W</div><div><h1>WAN Smart Manager</h1><p>Diseño · análisis · automatización de redes WAN</p></div></div>
+    <div class="status">● MODO SIMULACIÓN</div>
+  </header>
+  <section class="hero">
+    <h2>Tu red, organizada en un solo lugar.</h2>
+    <p>Planea direcciones IP, registra dispositivos y enlaces, genera plantillas para distintos fabricantes y consulta al asistente de recomendaciones. Esta primera versión funciona localmente en tu navegador: no se conecta a equipos reales ni envía datos a internet.</p>
+  </section>
+  <section class="stats">
+    <div class="stat"><div class="label">DISPOSITIVOS REGISTRADOS</div><div class="value" id="deviceCount">3</div><div class="sub">En el escenario actual</div></div>
+    <div class="stat"><div class="label">ENLACES WAN</div><div class="value" id="linkCount">2</div><div class="sub">Conexiones simuladas</div></div>
+    <div class="stat"><div class="label">VLAN DE EJEMPLO</div><div class="value">3</div><div class="sub">Administración, usuarios y voz</div></div>
+    <div class="stat"><div class="label">ESTADO DE SEGURIDAD</div><div class="value" style="color:var(--green);font-size:20px">Básico</div><div class="sub">Validaciones iniciales activas</div></div>
+  </section>
+
+  <nav class="tabs" aria-label="Módulos">
+    <button class="tab active" data-tab="overview">Resumen</button>
+    <button class="tab" data-tab="ip">IP Planning</button>
+    <button class="tab" data-tab="topology">Topología</button>
+    <button class="tab" data-tab="config">Configuraciones</button>
+    <button class="tab" data-tab="assistant">Asistente IA</button>
+    <button class="tab" data-tab="requirements">Requerimientos y costos</button>
+  </nav>
+
+  <section class="section active" id="overview">
+    <div class="panel"><h3>Escenario de demostración</h3><p class="desc">Esta red ficticia representa una oficina central conectada a dos sedes. En Topología puedes agregar equipos y crear enlaces seleccionando dos dispositivos. Los cambios se guardan en este navegador.</p>
+      <div class="topology" id="overviewTopology"></div>
+      <div class="list" id="overviewLinks"></div>
+      <div class="notice good">Consejo: comienza con direcciones y equipos ficticios. Esta herramienta todavía no aplica cambios en infraestructura real.</div>
+    </div>
+    <div class="grid2">
+      <div class="panel"><h3>Funciones disponibles</h3><p class="desc">Primera versión del proyecto.</p>
+        <div class="list">
+          <div class="item"><span>✓ Calculadora IPv4 con máscara, red y broadcast</span></div>
+          <div class="item"><span>✓ Registro de dispositivos y enlaces</span></div>
+          <div class="item"><span>✓ Plantillas Cisco IOS y Huawei VRP</span></div>
+          <div class="item"><span>✓ Recomendaciones locales basadas en reglas</span></div>
+          <div class="item"><span>◷ IPv6 avanzado, SSH real e IA conectada: siguiente etapa</span></div>
+        </div>
+      </div>
+      <div class="panel"><h3>Flujo recomendado</h3><p class="desc">Trabaja en este orden para diseñar una red.</p>
+        <div class="list">
+          <div class="item"><span><b>01</b> · Define el rango de direcciones IP</span></div>
+          <div class="item"><span><b>02</b> · Registra dispositivos y enlaces</span></div>
+          <div class="item"><span><b>03</b> · Genera una plantilla para el fabricante</span></div>
+          <div class="item"><span><b>04</b> · Revisa advertencias y requerimientos</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="ip">
+    <div class="panel"><h3>IP Planning · Calculadora IPv4</h3><p class="desc">Ingresa una dirección IPv4 y su prefijo CIDR. Ejemplo: 192.168.10.0 /26.</p>
+      <div class="formgrid">
+        <div class="field"><label for="ipAddress">Dirección IPv4</label><input id="ipAddress" value="192.168.10.0" placeholder="192.168.1.0"></div>
+        <div class="field"><label for="prefix">Prefijo CIDR</label><select id="prefix"><option>/24</option><option>/16</option><option>/25</option><option selected>/26</option><option>/27</option><option>/28</option><option>/29</option><option>/30</option><option>/23</option><option>/22</option><option>/20</option><option>/18</option><option>/32</option></select></div>
+      </div>
+      <div class="actions"><button id="calculateIp">Calcular subred</button><button class="secondary" id="fillExample">Cargar ejemplo del profesor</button></div>
+      <div id="ipResult" class="result"><h4>Resultado</h4><p>Presiona “Calcular subred” para ver los resultados.</p></div>
+    </div>
+  </section>
+
+  <section class="section" id="topology">
+    <div class="panel"><h3>Constructor de topología</h3><p class="desc">Agrega dispositivos ficticios a tu escenario. Por ahora se muestran como una lista y un esquema visual simple.</p>
+      <div class="formgrid">
+        <div class="field"><label for="devName">Nombre del dispositivo</label><input id="devName" value="R-SEDE-01" maxlength="40"></div>
+        <div class="field"><label for="devType">Tipo</label><select id="devType"><option value="Router">Router</option><option value="Switch">Switch</option><option value="Firewall">Firewall</option><option value="Servidor">Servidor</option><option value="ISP">ISP</option><option value="Access Point">Access Point</option></select></div>
+        <div class="field"><label for="devVendor">Fabricante</label><select id="devVendor"><option>Cisco</option><option>Huawei</option><option>Fortinet</option><option>MikroTik</option><option>Genérico</option></select></div>
+        <div class="field"><label for="devIp">IP de administración (opcional)</label><input id="devIp" placeholder="192.168.10.1"></div>
+      </div>
+      <div class="actions"><button id="addDevice">+ Agregar dispositivo</button><button class="secondary" id="resetTopology">Restablecer ejemplo</button></div>
+      <div class="panel" style="margin-top:16px;padding:14px;background:#0d192a">
+        <h3 style="font-size:15px">Crear un enlace entre dispositivos</h3>
+        <p class="desc" style="margin-bottom:12px">Elige los dos equipos que quieres conectar y define el tipo de enlace.</p>
+        <div class="formgrid">
+          <div class="field"><label for="linkFrom">Dispositivo de origen</label><select id="linkFrom"></select></div>
+          <div class="field"><label for="linkTo">Dispositivo de destino</label><select id="linkTo"></select></div>
+          <div class="field"><label for="linkType">Tipo de enlace</label><select id="linkType"><option>WAN</option><option>LAN</option><option>VPN</option><option>Trunk</option><option>Respaldo</option></select></div>
+          <div class="field"><label for="linkBandwidth">Ancho de banda (opcional)</label><input id="linkBandwidth" placeholder="Ej. 200 Mbps"></div>
+        </div>
+        <div class="actions"><button id="addLink">+ Crear enlace</button><button class="secondary" id="clearLinks">Eliminar todos los enlaces</button></div>
+      </div>
+      <div class="topology" id="topologyCanvas" style="margin-top:16px"></div>
+      <div class="list" id="deviceList"></div>
+      <h3 style="margin-top:18px">Enlaces registrados</h3>
+      <div class="list" id="linkList"></div>
+      <div class="notice good">Los dispositivos y enlaces se guardan en el almacenamiento local de este navegador. No se envían a internet.</div>
+    </div>
+  </section>
+
+  <section class="section" id="config">
+    <div class="panel"><h3>Generador de configuraciones</h3><p class="desc">Crea una plantilla de ejemplo. Revisa y adapta los comandos al modelo y versión exactos del equipo antes de utilizarlos.</p>
+      <div class="formgrid">
+        <div class="field"><label for="vendor">Fabricante</label><select id="vendor"><option value="Cisco">Cisco IOS</option><option value="Huawei">Huawei VRP</option><option value="Fortinet">Fortinet FortiGate (vista previa)</option><option value="MikroTik">MikroTik RouterOS (vista previa)</option></select></div>
+        <div class="field"><label for="hostname">Hostname</label><input id="hostname" value="R-BOGOTA"></div>
+        <div class="field"><label for="interfaceName">Interfaz</label><input id="interfaceName" value="GigabitEthernet0/0"></div>
+        <div class="field"><label for="interfaceIp">IP de interfaz</label><input id="interfaceIp" value="192.168.10.1"></div>
+        <div class="field"><label for="interfaceMask">Máscara IPv4</label><select id="interfaceMask"><option value="255.255.255.0">255.255.255.0 (/24)</option><option value="255.255.255.192" selected>255.255.255.192 (/26)</option><option value="255.255.255.128">255.255.255.128 (/25)</option><option value="255.255.255.224">255.255.255.224 (/27)</option></select></div>
+        <div class="field"><label for="vlan">VLAN</label><input id="vlan" type="number" min="1" max="4094" value="10"></div>
+      </div>
+      <div class="actions"><button id="generateConfig">Generar plantilla</button><button class="secondary" id="copyConfig">Copiar configuración</button></div>
+      <div id="configWarning" class="notice">Las plantillas son ejemplos educativos. No incluyen contraseñas ni se ejecutan sobre equipos.</div>
+      <div class="result"><h4>Configuración generada</h4><pre id="configOutput">Selecciona “Generar plantilla”.</pre></div>
+    </div>
+  </section>
+
+  <section class="section" id="assistant">
+    <div class="panel"><h3>Asistente de redes</h3><p class="desc">Este primer asistente funciona con reglas y respuestas locales; no es todavía un modelo de IA conectado. Puedes preguntarle sobre subnetting, VLAN, VPN, OSPF, BGP, seguridad o ancho de banda.</p>
+      <div class="field"><label for="question">¿Qué necesitas resolver?</label><textarea id="question" placeholder="Ejemplo: Necesito conectar tres sedes por VPN. ¿Qué debo tener en cuenta?"></textarea></div>
+      <div class="actions"><button id="askAssistant">Consultar asistente</button><button class="secondary" id="clearQuestion">Limpiar</button></div>
+      <div class="result"><h4>Recomendación</h4><div id="assistantAnswer" class="assistant-answer">Escribe una pregunta y pulsa “Consultar asistente”.</div></div>
+      <div class="notice">Para tener IA generativa real más adelante, se deberá integrar un backend con una API segura. No pegues claves API, contraseñas ni datos confidenciales en esta página.</div>
+    </div>
+  </section>
+
+  <section class="section" id="requirements">
+    <div class="panel"><h3>Requerimientos, ancho de banda y presupuesto</h3><p class="desc">Registra una estimación inicial para una sede. Los costos son valores de ejemplo que puedes cambiar.</p>
+      <div class="formgrid">
+        <div class="field"><label for="siteName">Sede / proyecto</label><input id="siteName" value="Sede principal"></div>
+        <div class="field"><label for="users">Usuarios estimados</label><input id="users" type="number" min="1" value="50"></div>
+        <div class="field"><label for="bandwidth">Ancho de banda requerido (Mbps)</label><input id="bandwidth" type="number" min="1" value="200"></div>
+        <div class="field"><label for="availability">Disponibilidad requerida</label><select id="availability"><option>Estándar</option><option>Alta disponibilidad</option><option>Crítica / redundante</option></select></div>
+        <div class="field"><label for="equipmentCost">Costo estimado de equipos (COP)</label><input id="equipmentCost" type="number" min="0" value="3500000"></div>
+        <div class="field"><label for="monthlyCost">Costo mensual del ISP (COP)</label><input id="monthlyCost" type="number" min="0" value="450000"></div>
+      </div>
+      <div class="actions"><button id="calculateBudget">Calcular estimación</button></div>
+      <div id="budgetResult" class="result"><h4>Resumen del proyecto</h4><p>Completa los datos y calcula la estimación.</p></div>
+    </div>
+  </section>
+  <div class="footer">WAN Smart Manager · Prototipo académico · Versión 0.1 · Solo simulación local</div>
+</div>
+<script>
+const $ = id => document.getElementById(id);
+const defaultDevices = [
+ {name:"ISP-Principal",type:"ISP",vendor:"Genérico",ip:""},
+ {name:"R-BOGOTA",type:"Router",vendor:"Cisco",ip:"192.168.10.1"},
+ {name:"SW-CORE",type:"Switch",vendor:"Cisco",ip:"192.168.10.2"}
+];
+let devices = loadSaved("wsm_devices", defaultDevices);
+let links = loadSaved("wsm_links", [
+ {from:"ISP-Principal",to:"R-BOGOTA",type:"WAN",bandwidth:"200 Mbps"},
+ {from:"R-BOGOTA",to:"SW-CORE",type:"LAN",bandwidth:"1 Gbps"}
+]);
+function loadSaved(key, fallback){
+ try { const value=localStorage.getItem(key); return value?JSON.parse(value):JSON.parse(JSON.stringify(fallback)); }
+ catch(e){ return JSON.parse(JSON.stringify(fallback)); }
+}
+function saveTopology(){
+ try {
+  localStorage.setItem("wsm_devices", JSON.stringify(devices));
+  localStorage.setItem("wsm_links", JSON.stringify(links));
+ } catch(e) { console.warn("No se pudo guardar en el navegador.", e); }
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+document.querySelectorAll(".tab").forEach(btn=>btn.addEventListener("click",()=>{
+ document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b===btn));
+ document.querySelectorAll(".section").forEach(s=>s.classList.toggle("active",s.id===btn.dataset.tab));
+}));
+function ipv4ToInt(ip){
+ const p=ip.trim().split(".");
+ if(p.length!==4 || p.some(x=>x===""||!/^\d+$/.test(x)||Number(x)<0||Number(x)>255)) throw new Error("Escribe una IPv4 válida, por ejemplo 192.168.10.0.");
+ return p.reduce((n,x)=>((n*256)+Number(x))>>>0,0)>>>0;
+}
+function intToIp(n){return [n>>>24,(n>>>16)&255,(n>>>8)&255,n&255].join(".");}
+function calcSubnet(){
+ try{
+  const ip=$("ipAddress").value; const addr=ipv4ToInt(ip); const prefix=Number($("prefix").value.replace("/",""));
+  const mask=prefix===0?0:(0xffffffff << (32-prefix))>>>0;
+  const network=(addr&mask)>>>0; const broadcast=(network | (~mask>>>0))>>>0;
+  const total=Math.pow(2,32-prefix); const hosts=prefix>=31? (prefix===31?2:1):Math.max(0,total-2);
+  const maskIp=intToIp(mask); const first=prefix>=31?intToIp(network):intToIp((network+1)>>>0); const last=prefix>=31?intToIp(broadcast):intToIp((broadcast-1)>>>0);
+  $("ipResult").innerHTML=`<h4>Resultado del cálculo</h4><div class="kv">
+   <div><small>Dirección ingresada</small><strong>${escapeHtml(ip)}/${prefix}</strong></div>
+   <div><small>Máscara de subred</small><strong>${maskIp}</strong></div>
+   <div><small>Dirección de red</small><strong>${intToIp(network)}</strong></div>
+   <div><small>Broadcast</small><strong>${intToIp(broadcast)}</strong></div>
+   <div><small>Primer host utilizable</small><strong>${first}</strong></div>
+   <div><small>Último host utilizable</small><strong>${last}</strong></div>
+   <div><small>Total de direcciones</small><strong>${total.toLocaleString("es-CO")}</strong></div>
+   <div><small>Hosts utilizables (IPv4)</small><strong>${hosts.toLocaleString("es-CO")}</strong></div></div>
+   <p style="color:var(--muted);font-size:12px;margin:12px 0 0">Bits de red: ${prefix} · Bits de host: ${32-prefix}</p>`;
+ }catch(e){$("ipResult").innerHTML=`<h4 style="color:var(--red)">Revisa los datos</h4><p>${escapeHtml(e.message)}</p>`;}
+}
+$("calculateIp").addEventListener("click",calcSubnet);
+$("fillExample").addEventListener("click",()=>{$("ipAddress").value="192.168.10.0";$("prefix").value="/26";calcSubnet();});
+function renderDevices(){
+ const names=new Set(devices.map(d=>d.name));
+ links=links.filter(l=>names.has(l.from)&&names.has(l.to));
+ $("deviceCount").textContent=devices.length;
+ $("linkCount").textContent=links.length;
+ const emoji=d=>d.type==="Router"?"🛜":d.type==="Switch"?"🔀":d.type==="Firewall"?"🛡️":d.type==="Servidor"?"🖥️":d.type==="ISP"?"🌐":"📶";
+ const deviceCards=devices.map(d=>`<div class="device"><div class="emoji">${emoji(d)}</div><strong>${escapeHtml(d.name)}</strong><small>${escapeHtml(d.type)} · ${escapeHtml(d.vendor)}${d.ip?"<br>"+escapeHtml(d.ip):""}</small></div>`).join("");
+ $("topologyCanvas").innerHTML=deviceCards||'<div class="empty">Todavía no hay dispositivos. Agrega uno usando el formulario de arriba.</div>';
+ $("deviceList").innerHTML=devices.map((d,i)=>`<div class="item"><span><b>${escapeHtml(d.name)}</b><small>${escapeHtml(d.type)} · ${escapeHtml(d.vendor)}${d.ip?" · "+escapeHtml(d.ip):""}</small></span><button class="remove" data-remove="${i}" aria-label="Eliminar ${escapeHtml(d.name)}">Eliminar</button></div>`).join("")||'<div class="empty">No hay dispositivos registrados.</div>';
+ $("deviceList").querySelectorAll("[data-remove]").forEach(b=>b.addEventListener("click",()=>{devices.splice(Number(b.dataset.remove),1);renderDevices();}));
+ const from=$("linkFrom"),to=$("linkTo"),prevFrom=from.value,prevTo=to.value;
+ const opts=devices.map(d=>`<option value="${escapeHtml(d.name)}">${escapeHtml(d.name)}</option>`).join("");
+ from.innerHTML=opts;to.innerHTML=opts;
+ if(devices.some(d=>d.name===prevFrom))from.value=prevFrom;
+ if(devices.some(d=>d.name===prevTo))to.value=prevTo;
+ $("addLink").disabled=devices.length<2;
+ $("linkList").innerHTML=links.map((l,i)=>`<div class="item"><span><b>${escapeHtml(l.from)} ↔ ${escapeHtml(l.to)}</b><small>${escapeHtml(l.type)}${l.bandwidth?" · "+escapeHtml(l.bandwidth):""}</small></span><button class="remove" data-link-remove="${i}">Eliminar</button></div>`).join("")||'<div class="empty">No hay enlaces creados todavía.</div>';
+ $("linkList").querySelectorAll("[data-link-remove]").forEach(b=>b.addEventListener("click",()=>{links.splice(Number(b.dataset.linkRemove),1);renderDevices();}));
+ $("overviewTopology").innerHTML=deviceCards||'<div class="empty">Agrega dispositivos en Topología.</div>';
+ $("overviewLinks").innerHTML=links.map(l=>`<div class="item"><span><b>${escapeHtml(l.from)} ↔ ${escapeHtml(l.to)}</b><small>${escapeHtml(l.type)}${l.bandwidth?" · "+escapeHtml(l.bandwidth):""}</small></span></div>`).join("")||'<div class="empty">No hay enlaces registrados.</div>';
+ saveTopology();
+}
+$("addDevice").addEventListener("click",()=>{
+ const name=$("devName").value.trim(), type=$("devType").value, vendor=$("devVendor").value, ip=$("devIp").value.trim();
+ if(!name){alert("Escribe un nombre para el dispositivo.");return;}
+ if(devices.some(d=>d.name.toLowerCase()===name.toLowerCase())){alert("Ya existe un dispositivo con ese nombre.");return;}
+ if(ip){try{ipv4ToInt(ip);}catch(e){alert("La IP no parece válida. "+e.message);return;}}
+ devices.push({name,type,vendor,ip});renderDevices();$("devName").value="";
+});
+$("addLink").addEventListener("click",()=>{
+ const from=$("linkFrom").value,to=$("linkTo").value,type=$("linkType").value,bandwidth=$("linkBandwidth").value.trim();
+ if(!from||!to){alert("Agrega al menos dos dispositivos antes de crear un enlace.");return;}
+ if(from===to){alert("El origen y el destino deben ser dispositivos diferentes.");return;}
+ if(links.some(l=>(l.from===from&&l.to===to&&l.type===type)||(l.from===to&&l.to===from&&l.type===type))){alert("Ya existe un enlace de ese tipo entre esos dispositivos.");return;}
+ links.push({from,to,type,bandwidth});$("linkBandwidth").value="";renderDevices();
+});
+$("clearLinks").addEventListener("click",()=>{links=[];renderDevices();});
+$("resetTopology").addEventListener("click",()=>{
+ devices=JSON.parse(JSON.stringify(defaultDevices));
+ links=[{from:"ISP-Principal",to:"R-BOGOTA",type:"WAN",bandwidth:"200 Mbps"},{from:"R-BOGOTA",to:"SW-CORE",type:"LAN",bandwidth:"1 Gbps"}];
+ renderDevices();
+});
+function generateConfig(){
+ const vendor=$("vendor").value, host=$("hostname").value.trim(), iface=$("interfaceName").value.trim(), ip=$("interfaceIp").value.trim(), mask=$("interfaceMask").value, vlan=Number($("vlan").value);
+ if(!host||!iface){$("configOutput").textContent="Completa el hostname y la interfaz.";return;}
+ try{ipv4ToInt(ip);}catch(e){$("configOutput").textContent=e.message;return;}
+ if(!Number.isInteger(vlan)||vlan<1||vlan>4094){$("configOutput").textContent="La VLAN debe estar entre 1 y 4094.";return;}
+ let cfg="";
+ if(vendor==="Cisco") cfg=`! PLANTILLA EDUCATIVA - Cisco IOS\nhostname ${host}\n!\nvlan ${vlan}\n name VLAN_${vlan}\n!\ninterface ${iface}\n description Enlace configurado por WAN Smart Manager\n ip address ${ip} ${mask}\n no shutdown\n!\n! Revisar modelo, sintaxis y plan de direccionamiento antes de aplicar.`;
+ else if(vendor==="Huawei") cfg=`# PLANTILLA EDUCATIVA - Huawei VRP\nsysname ${host}\n!\nvlan ${vlan}\n name VLAN_${vlan}\nquit\n!\ninterface ${iface}\n description Enlace configurado por WAN Smart Manager\n ip address ${ip} ${mask}\n undo shutdown\nquit\n!\n# Revisar sintaxis y compatibilidad del modelo antes de aplicar.`;
+ else if(vendor==="Fortinet") cfg=`# VISTA PREVIA - FortiGate\n# La configuración exacta depende de la versión de FortiOS y del tipo de interfaz.\n# Equipo: ${host}\n# Interfaz: ${iface}\n# IP: ${ip} / máscara ${mask}\n# VLAN prevista: ${vlan}\n# Completar en una etapa posterior con plantilla validada para la versión objetivo.`;
+ else cfg=`# VISTA PREVIA - MikroTik RouterOS\n# La configuración exacta depende de la versión y del diseño de interfaces.\n# Equipo: ${host}\n# Interfaz: ${iface}\n# IP: ${ip} / máscara ${mask}\n# VLAN prevista: ${vlan}\n# Completar en una etapa posterior con plantilla validada para la versión objetivo.`;
+ $("configOutput").textContent=cfg;
+ $("configWarning").textContent="Revisión de seguridad: no se han agregado credenciales. Esta plantilla no se ejecuta sobre ningún dispositivo. Verifica interfaz, máscara, VLAN, sintaxis y compatibilidad antes de usarla.";
+}
+$("generateConfig").addEventListener("click",generateConfig);
+$("copyConfig").addEventListener("click",async()=>{const txt=$("configOutput").textContent;try{await navigator.clipboard.writeText(txt);$("copyConfig").textContent="¡Copiado!";setTimeout(()=>$("copyConfig").textContent="Copiar configuración",1500);}catch(e){alert("No se pudo copiar automáticamente. Selecciona el texto y cópialo manualmente.");}});
+function ask(){
+ const q=$("question").value.trim().toLowerCase();if(!q){$("assistantAnswer").textContent="Escribe una pregunta para que pueda orientarte.";return;}
+ let answer="";
+ if(/subnet|máscara|mascara|broadcast|ip planning|direccionamiento|ipv4/.test(q)) answer="IP PLANNING\n1. Define cuántos equipos necesitan dirección.\n2. Elige un prefijo que ofrezca suficientes direcciones.\n3. Verifica dirección de red, broadcast y rango utilizable.\n4. Evita superponer subredes y documenta qué sede o VLAN usa cada rango.\n\nPuedes ir al módulo IP Planning para calcular una subred IPv4.";
+ else if(/ipv6/.test(q)) answer="IPv6\n1. Define un prefijo asignado por tu organización o proveedor.\n2. Planifica subredes por sede y función.\n3. En LAN normalmente se usa /64 por segmento.\n4. IPv6 no utiliza broadcast; usa multicast y neighbor discovery.\n\nEsta primera versión aún no calcula subredes IPv6 automáticamente.";
+ else if(/vlan/.test(q)) answer="VLAN\n1. Crea un ID y un nombre por función (por ejemplo, VLAN 10 Administración, VLAN 20 Usuarios).\n2. Define qué puertos son access y cuáles trunk.\n3. Configura el enrutamiento entre VLAN solo donde sea necesario.\n4. Aplica ACL o políticas de firewall para limitar el tráfico entre segmentos.\n5. Documenta el rango IP de cada VLAN.";
+ else if(/vpn|túnel|tunel/.test(q)) answer="VPN entre sedes\n1. Confirma que ambos extremos tengan conectividad IP.\n2. Define la tecnología y compatibilidad (por ejemplo, IPsec site-to-site).\n3. Planifica subredes no superpuestas y rutas.\n4. Define cifrado, autenticación, intercambio de claves y políticas.\n5. Prueba conectividad y registra métricas.\n\nNo guardes claves compartidas ni contraseñas en el repositorio.";
+ else if(/ospf/.test(q)) answer="OSPF\nEs un protocolo de enrutamiento dinámico interno. Antes de configurarlo, define áreas, interfaces participantes, router ID, redes anunciadas y autenticación si aplica. Comprueba vecinos, tabla de rutas y redundancia en un laboratorio antes de llevarlo a producción.";
+ else if(/\bbgp\b/.test(q)) answer="BGP\nSe utiliza para intercambiar rutas entre sistemas autónomos, por ejemplo entre organizaciones o proveedores. Define ASN, vecinos, prefijos permitidos y filtros de entrada/salida. Aplica políticas de prefijos y evita anunciar rutas que no te pertenecen.";
+ else if(/ancho de banda|bandwidth|mbps|velocidad|capacidad/.test(q)) answer="Ancho de banda\n1. Identifica aplicaciones (voz, videollamadas, archivos, sistemas empresariales).\n2. Estima cuántos usuarios las usan al mismo tiempo.\n3. Mide o estima el consumo por aplicación.\n4. Añade margen para crecimiento y picos.\n5. Si el servicio es crítico, evalúa un enlace de respaldo y QoS.\n\nLa cifra final debe basarse en mediciones o requisitos reales.";
+ else if(/seguridad|firewall|ataque|ciber|contraseña|contrasena|clave/.test(q)) answer="Seguridad básica\n• Usa credenciales únicas y no las guardes en el código.\n• Limita la administración a una red de gestión autorizada.\n• Usa SSH en vez de Telnet cuando el dispositivo lo permita.\n• Aplica mínimo privilegio, actualizaciones y copias de seguridad.\n• Valida las configuraciones y pruébalas en laboratorio.\n• Revisa ACL, firewall, registros y acceso remoto.";
+ else if(/presupuesto|costo|costos|equipos|requerimiento/.test(q)) answer="Requerimientos y presupuesto\n1. Cuenta sedes, usuarios y dispositivos.\n2. Define disponibilidad, soporte, seguridad y crecimiento.\n3. Separa costos iniciales (equipos, instalación) de recurrentes (ISP, licencias, soporte).\n4. Compara al menos dos alternativas y deja claro qué valores son estimados.\n5. Documenta supuestos y fecha de los precios.";
+ else if(/cisco|huawei|fortinet|mikrotik|fabricante|configuración|configuracion/.test(q)) answer="Configuración por fabricante\nSelecciona el fabricante en el módulo Configuraciones y genera una plantilla de ejemplo. Los comandos varían por modelo, versión del sistema operativo y función del equipo. Valida la sintaxis en documentación oficial y en laboratorio; esta herramienta no aplica comandos reales.";
+ else if(/topolog|conex|dispositivo|isp|router|switch/.test(q)) answer="Análisis de topología\n1. Registra cada router, switch, firewall, servidor e ISP.\n2. Documenta interfaces, direcciones IP, velocidad y función.\n3. Dibuja enlaces primarios y de respaldo.\n4. Identifica puntos únicos de falla y enlaces saturables.\n5. Comprueba que las subredes y rutas no se superpongan.";
+ else answer="Puedo orientarte en subnetting, IPv4/IPv6, VLAN, VPN, OSPF, BGP, seguridad, fabricantes, topología, presupuesto y ancho de banda.\n\nPara recibir una recomendación útil, cuéntame el objetivo de la red, número de sedes y usuarios, equipos disponibles y restricciones. Evita compartir contraseñas, tokens o datos confidenciales.\n\nNota: soy un asistente local basado en reglas, no una IA generativa conectada todavía.";
+ $("assistantAnswer").textContent=answer;
+}
+$("askAssistant").addEventListener("click",ask);$("clearQuestion").addEventListener("click",()=>{$("question").value="";$("assistantAnswer").textContent="Escribe una pregunta y pulsa “Consultar asistente”.";});
+$("calculateBudget").addEventListener("click",()=>{
+ const site=$("siteName").value.trim()||"Sede sin nombre", users=Number($("users").value), bw=Number($("bandwidth").value), equipment=Number($("equipmentCost").value), monthly=Number($("monthlyCost").value), availability=$("availability").value;
+ if(!Number.isFinite(users)||users<1||!Number.isFinite(bw)||bw<1||equipment<0||monthly<0){$("budgetResult").innerHTML="<h4>Revisa los datos</h4><p>Usuarios y ancho de banda deben ser mayores que cero; los costos no pueden ser negativos.</p>";return;}
+ const money=n=>n.toLocaleString("es-CO",{style:"currency",currency:"COP",maximumFractionDigits:0});
+ $("budgetResult").innerHTML=`<h4>Estimación para ${escapeHtml(site)}</h4><div class="kv"><div><small>Usuarios estimados</small><strong>${users}</strong></div><div><small>Ancho de banda objetivo</small><strong>${bw} Mbps</strong></div><div><small>Disponibilidad</small><strong>${escapeHtml(availability)}</strong></div><div><small>Costos iniciales</small><strong>${money(equipment)}</strong></div><div><small>Costo mensual ISP</small><strong>${money(monthly)}</strong></div><div><small>Estimación del primer año</small><strong>${money(equipment+monthly*12)}</strong></div></div><p style="color:var(--muted);font-size:12px;margin-bottom:0">Estimación orientativa basada en los valores ingresados. No incluye impuestos, instalación, licencias, soporte ni otros costos no registrados.</p>`;
+});
+renderDevices();calcSubnet();generateConfig();
+</script>
+</body>
+</html>
