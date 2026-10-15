@@ -2,7 +2,7 @@ WAN Smart Manager
 
 Proyecto individual — Interconexión de Redes WAN
 
-Repositorio público: [Pegar aquí el enlace de mi repositorio]
+Repositorio público: https://github.com/anamariabej703-ui/WAN-Smart-Manager
 
 1. Descripción del proyecto
 
