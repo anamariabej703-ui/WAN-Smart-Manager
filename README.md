@@ -1,69 +1,44 @@
-WAN Smart Manager
+# WAN Smart Manager
 
-Proyecto individual — Interconexión de Redes WAN
+**Proyecto individual — Interconexión de Redes WAN**
 
-Repositorio público: https://github.com/anamariabej703-ui/WAN-Smart-Manager
+**Autora:** Ana María Bejarano  
+**Repositorio público:** (https://github.com/anamariabej703-ui/WAN-Smart-Manager)
 
-1. Descripción del proyecto
+## Descripción
 
-WAN Smart Manager es una aplicación web desarrollada para apoyar el diseño y la gestión de redes WAN. Permite realizar cálculos de subnetting IPv4, registrar dispositivos de red y sus conexiones, generar plantillas de configuración y consultar recomendaciones mediante un asistente local.
+WAN Smart Manager es una aplicación web diseñada para apoyar el diseño y la gestión de redes WAN mediante herramientas de cálculo IP, registro de dispositivos, conexiones simuladas y generación de plantillas de configuración.
 
-2. Funcionalidades implementadas
+## Funcionalidades
 
-Cálculo de subnetting IPv4.
+- Cálculo de subnetting IPv4.
+- Registro de dispositivos de red.
+- Registro de enlaces WAN, LAN, VPN, Trunk y Respaldo.
+- Generación de plantillas para Cisco y Huawei.
+- Plantillas de referencia para otros fabricantes.
+- Estimación de presupuesto y ancho de banda.
+- Asistente local para consultas y recomendaciones.
 
-Registro de dispositivos de red.
+## Cómo ejecutar la aplicación
 
-Registro de conexiones WAN, LAN, VPN, Trunk y Respaldo.
+1. Descargar el archivo `index.html` del repositorio.
+2. Abrirlo con Google Chrome.
+3. Utilizar los módulos con datos de prueba.
 
-Generación de plantillas de configuración para Cisco y Huawei.
+## Evidencias del Corte 2
 
-Plantillas de referencia para otros fabricantes.
+| Archivo | Descripción |
+|---|---|
+| `docs/capturas/01-subnetting.png` | Cálculo de una subred |
+| `docs/capturas/02-topologia.png` | Dispositivos y enlaces |
+| `docs/capturas/03-config-cisco.png` | Plantilla Cisco |
+| `docs/capturas/04-config-huawei.png` | Plantilla Huawei |
+| `docs/capturas/05-github-commits.png` | Historial de cambios |
 
-Estimación básica de presupuesto y ancho de banda.
+## Alcance y limitaciones
 
-Asistente local basado en reglas para consultas y recomendaciones.
+La aplicación utiliza conexiones simuladas y no configura equipos físicos ni realiza conexiones SSH reales. El asistente utiliza reglas locales y no es, por ahora, un modelo de inteligencia artificial generativa.
 
-3. Cómo ejecutar la aplicación
+## Estado
 
-Descargar el archivo index.html del repositorio.
-
-Abrir el archivo con Google Chrome.
-
-Utilizar los módulos disponibles y realizar pruebas con datos simulados.
-
-4. Evidencias del Corte 2
-
-Archivo
-
-Evidencia
-
-docs/capturas/01-subnetting.png
-
-Cálculo de una subred
-
-docs/capturas/02-topologia.png
-
-Dispositivos y conexiones
-
-docs/capturas/03-config-cisco.png
-
-Plantilla Cisco
-
-docs/capturas/04-config-huawei.png
-
-Plantilla Huawei
-
-docs/capturas/05-github-commits.png
-
-Historial de cambios
-
-5. Alcance y limitaciones
-
-La aplicación trabaja con simulaciones locales. No establece conexiones SSH reales ni aplica configuraciones directamente en equipos físicos. El asistente utiliza reglas locales y no constituye, por ahora, un modelo de inteligencia artificial generativa.
-
-6. Estado del proyecto
-
-Versión 0.2 — Herramienta web en desarrollo.
-
-Las funcionalidades se documentarán y validarán mediante las evidencias del proyecto.
+Versión 0.2 — Proyecto en desarrollo.
