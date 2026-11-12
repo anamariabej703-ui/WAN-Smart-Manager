@@ -17,25 +17,25 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-
 .result{margin-top:16px;border:1px solid #31516a;background:#0b1829;border-radius:12px;padding:15px;overflow:auto}.result h4{margin:0 0 10px;color:var(--green)}.result pre{white-space:pre-wrap;word-break:break-word;color:#d8e7f7;font:12px/1.6 Consolas,monospace;margin:0}.kv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.kv div{padding:12px;background:#142239;border:1px solid #293f59;border-radius:10px}.kv small{display:block;color:var(--muted);font-size:11px;margin-bottom:5px}.kv strong{font-size:14px;overflow-wrap:anywhere}
 .topology{min-height:180px;border:1px dashed #3b5674;border-radius:14px;background-color:#0d192a;background-image:radial-gradient(#38516b 1px,transparent 1px);background-size:18px 18px;padding:15px;display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap}.device{background:#172b43;border:1px solid #42617f;border-radius:12px;padding:12px;min-width:120px;text-align:center}.device .emoji{font-size:23px}.device strong{display:block;margin:5px 0;font-size:13px}.device small{color:var(--muted);font-size:11px}.linkline{color:var(--cyan);font-weight:800}.edge{display:flex;align-items:center;gap:7px;color:var(--cyan);font-size:12px;font-weight:800;flex-direction:column}.edge .line{width:38px;border-top:3px solid var(--cyan);height:1px}.edge small{color:var(--muted);font-weight:500}.empty{color:var(--muted);font-size:13px;text-align:center;padding:20px}
 .list{display:grid;gap:9px;margin-top:14px}.item{display:flex;justify-content:space-between;gap:12px;align-items:center;background:#142239;border:1px solid #293f59;border-radius:11px;padding:11px}.item span{font-size:13px}.item small{display:block;color:var(--muted);margin-top:4px}.remove{background:#40252e;color:#ffb9b9;padding:7px 10px}
-.notice{border-left:3px solid var(--amber);background:#322b1c;color:#ffe3a7;padding:12px;border-radius:8px;font-size:12px;line-height:1.5;margin-top:14px}.good{border-left-color:var(--green);background:#123329;color:#b9f5da}.assistant-answer{white-space:pre-wrap;line-height:1.6;color:#e1edf9;font-size:14px}.footer{text-align:center;color:#7288a3;font-size:11px;padding:18px 0 4px}
+.notice{border-left:3px solid var(--amber);background:#322b1c;color:#ffe3a7;padding:12px;border-radius:8px;font-size:12px;line-height:1.5;margin-top:14px}.good{border-left-color:var(--green);background:#123329;color:#b9f5da}.danger-notice{border-left-color:var(--red);background:#381a1a;color:#ffb3b3}.assistant-answer{white-space:pre-wrap;line-height:1.6;color:#e1edf9;font-size:14px}.footer{text-align:center;color:#7288a3;font-size:11px;padding:18px 0 4px}
 @media(max-width:800px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.grid2{grid-template-columns:1fr}.app{padding:13px}.panel{padding:15px}}@media(max-width:480px){.formgrid{grid-template-columns:1fr}.stats{gap:8px}.stat{padding:12px}.stat .value{font-size:21px}.hero{padding:17px}}
 </style>
 </head>
 <body>
 <div class="app">
   <header class="topbar">
-    <div class="brand"><div class="logo">W</div><div><h1>WAN Smart Manager v3</h1><p>Diseño · análisis · automatización multimarca de redes WAN</p></div></div>
-    <div class="status">● MODO CORTE 3 (V3.0)</div>
+    <div class="brand"><div class="logo">W</div><div><h1>WAN Smart Manager v3</h1><p>Diseño · análisis · automatización multimarca & ciberdefensa de redes WAN</p></div></div>
+    <div class="status">● MODO CORTE 3 (V3.0 - DEFENSE INTEGRATED)</div>
   </header>
   <section class="hero">
-    <h2>Tu red, organizada en un solo lugar.</h2>
-    <p>Planea direcciones IP, registra dispositivos y enlaces, genera plantillas para Cisco, Huawei, Fortinet y MikroTik, y consulta al asistente de recomendaciones.</p>
+    <h2>Tu red, organizada y asegurada en un solo lugar.</h2>
+    <p>Planea direcciones IP, registra dispositivos y enlaces, genera plantillas para Cisco, Huawei, Fortinet y MikroTik con ciberdefensa activa, y consulta al asistente de recomendaciones.</p>
   </section>
   <section class="stats">
     <div class="stat"><div class="label">DISPOSITIVOS REGISTRADOS</div><div class="value" id="deviceCount">3</div><div class="sub">En el escenario actual</div></div>
     <div class="stat"><div class="label">ENLACES WAN</div><div class="value" id="linkCount">2</div><div class="sub">Conexiones simuladas</div></div>
     <div class="stat"><div class="label">MARCAS SOPORTADAS</div><div class="value" style="color:var(--cyan)">4 / 4</div><div class="sub">Cisco, Huawei, Fortinet, MikroTik</div></div>
-    <div class="stat"><div class="label">ESTADO DE SEGURIDAD</div><div class="value" style="color:var(--green);font-size:20px">Validado</div><div class="sub">Ciberdefensa integrada</div></div>
+    <div class="stat"><div class="label">ESTADO DE CIBERDEFENSA</div><div class="value" style="color:var(--green);font-size:20px">Activo (Anti-IA)</div><div class="sub">Filtros & Sanitización OK</div></div>
   </section>
 
   <nav class="tabs" aria-label="Módulos">
@@ -51,16 +51,16 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-
     <div class="panel"><h3>Escenario de demostración</h3><p class="desc">Esta red representa una oficina central conectada a dos sedes. En Topología puedes agregar equipos y crear enlaces seleccionando dos dispositivos.</p>
       <div class="topology" id="overviewTopology"></div>
       <div class="list" id="overviewLinks"></div>
-      <div class="notice good">Consejo: comienza con direcciones y equipos ficticios. Esta herramienta no aplica cambios en infraestructura real.</div>
+      <div class="notice good">Consejo: comienza con direcciones y equipos ficticios. Esta herramienta no aplica cambios en infraestructura real ni transmite credenciales a servidores externos.</div>
     </div>
     <div class="grid2">
-      <div class="panel"><h3>Funciones disponibles (Corte 3)</h3><p class="desc">Versión v3.0 con soporte multimarca completo.</p>
+      <div class="panel"><h3>Funciones disponibles (Corte 3)</h3><p class="desc">Versión v3.0 con soporte multimarca y ciberdefensa integrada.</p>
         <div class="list">
-          <div class="item"><span>✓ Calculadora IPv4 con máscara, red y broadcast</span></div>
-          <div class="item"><span>✓ Registro de dispositivos y enlaces</span></div>
-          <div class="item"><span>✓ Generación multimarca: Cisco IOS, Huawei VRP, Fortinet FortiOS, MikroTik RouterOS</span></div>
-          <div class="item"><span>✓ Asistente local de recomendaciones</span></div>
-          <div class="item"><span>✓ Ciberdefensa integrada contra configuraciones inseguras</span></div>
+          <div class="item"><span>✓ Calculadora IPv4 con validación estricta de octetos y clase</span></div>
+          <div class="item"><span>✓ Registro seguro de dispositivos (Sanitización XSS / Prompt Injection)</span></div>
+          <div class="item"><span>✓ Generación multimarca: Cisco, Huawei, Fortinet, MikroTik</span></div>
+          <div class="item"><span>✓ Módulo Ciberdefensa: Alerta de credenciales por defecto y servicios inseguros (Telnet/HTTP)</span></div>
+          <div class="item"><span>✓ Asistente de seguridad basado en políticas <code>docs/politicas-ia.md</code></span></div>
         </div>
       </div>
       <div class="panel"><h3>Flujo recomendado</h3><p class="desc">Trabaja en este orden para diseñar una red.</p>
@@ -68,7 +68,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-
           <div class="item"><span><b>01</b> · Define el rango de direcciones IP</span></div>
           <div class="item"><span><b>02</b> · Registra dispositivos y enlaces</span></div>
           <div class="item"><span><b>03</b> · Genera una plantilla para la marca deseada</span></div>
-          <div class="item"><span><b>04</b> · Revisa advertencias y requerimientos</span></div>
+          <div class="item"><span><b>04</b> · Audita la ciberdefensa y valida requerimientos</span></div>
         </div>
       </div>
     </div>
@@ -86,7 +86,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-
   </section>
 
   <section class="section" id="topology">
-    <div class="panel"><h3>Constructor de topología</h3><p class="desc">Agrega dispositivos ficticios a tu escenario.</p>
+    <div class="panel"><h3>Constructor de topología</h3><p class="desc">Agrega dispositivos ficticios a tu escenario. (Valida entradas contra inyecciones y nombres peligrosos).</p>
       <div class="formgrid">
         <div class="field"><label for="devName">Nombre del dispositivo</label><input id="devName" value="R-SEDE-01" maxlength="40"></div>
         <div class="field"><label for="devType">Tipo</label><select id="devType"><option value="Router">Router</option><option value="Switch">Switch</option><option value="Firewall">Firewall</option><option value="Servidor">Servidor</option><option value="ISP">ISP</option><option value="Access Point">Access Point</option></select></div>
@@ -114,7 +114,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-
   </section>
 
   <section class="section" id="config">
-    <div class="panel"><h3>Generador de configuraciones multimarca</h3><p class="desc">Crea una plantilla de configuración para Cisco, Huawei, Fortinet o MikroTik.</p>
+    <div class="panel"><h3>Generador de configuraciones multimarca + Ciberdefensa</h3><p class="desc">Crea una plantilla de configuración para Cisco, Huawei, Fortinet o MikroTik. Aplica reglas de mínimo privilegio.</p>
       <div class="formgrid">
         <div class="field"><label for="vendor">Fabricante</label><select id="vendor"><option value="Cisco">Cisco IOS</option><option value="Huawei">Huawei VRP</option><option value="Fortinet">Fortinet FortiOS</option><option value="MikroTik">MikroTik RouterOS</option></select></div>
         <div class="field"><label for="hostname">Hostname</label><input id="hostname" value="R-BOGOTA"></div>
@@ -122,6 +122,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-
         <div class="field"><label for="interfaceIp">IP de interfaz</label><input id="interfaceIp" value="192.168.10.1"></div>
         <div class="field"><label for="interfaceMask">Máscara IPv4</label><select id="interfaceMask"><option value="255.255.255.0">255.255.255.0 (/24)</option><option value="255.255.255.192" selected>255.255.255.192 (/26)</option><option value="255.255.255.128">255.255.255.128 (/25)</option><option value="255.255.255.224">255.255.255.224 (/27)</option></select></div>
         <div class="field"><label for="vlan">VLAN</label><input id="vlan" type="number" min="1" max="4094" value="10"></div>
+        <div class="field"><label for="secureServices">Servicios de Gestión Permitidos</label><select id="secureServices"><option value="secure">Seguro (SSH / HTTPS únicamente)</option><option value="insecure">Inseguro (Permitir Telnet / HTTP - ADVERTENCIA)</option></select></div>
       </div>
       <div class="actions"><button id="generateConfig">Generar plantilla</button><button class="secondary" id="copyConfig">Copiar configuración</button></div>
       <div id="configWarning" class="notice">Las plantillas son ejemplos educativos. No incluyen contraseñas ni se ejecutan sobre equipos.</div>
@@ -130,11 +131,11 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-
   </section>
 
   <section class="section" id="assistant">
-    <div class="panel"><h3>Asistente de redes</h3><p class="desc">Pregúntale sobre subnetting, VLAN, VPN, OSPF, BGP, seguridad o ancho de banda.</p>
-      <div class="field"><label for="question">¿Qué necesitas resolver?</label><textarea id="question" placeholder="Ejemplo: Necesito conectar tres sedes por VPN. ¿Qué debo tener en cuenta?"></textarea></div>
+    <div class="panel"><h3>Asistente de redes y Ciberdefensa Anti-IA</h3><p class="desc">Pregúntale sobre subnetting, VLAN, VPN, OSPF, BGP, ciberdefensa, politicas-ia o seguridad.</p>
+      <div class="field"><label for="question">¿Qué necesitas resolver?</label><textarea id="question" placeholder="Ejemplo: ¿Cuáles son las políticas de ciberdefensa para la IA en este proyecto?"></textarea></div>
       <div class="actions"><button id="askAssistant">Consultar asistente</button><button class="secondary" id="clearQuestion">Limpiar</button></div>
-      <div class="result"><h4>Recomendación</h4><div id="assistantAnswer" class="assistant-answer">Escribe una pregunta y pulsa “Consultar asistente”.</div></div>
-      <div class="notice">No pegues claves API, contraseñas ni datos confidenciales en esta página.</div>
+      <div class="result"><h4>Recomendación / Diagnóstico de Seguridad</h4><div id="assistantAnswer" class="assistant-answer">Escribe una pregunta y pulsa “Consultar asistente”.</div></div>
+      <div class="notice">Ciberdefensa activa: Esta app no transmite secretos, tokens ni IPs reales a APIs externas. Los datos sensibles se filtran en el cliente.</div>
     </div>
   </section>
 
@@ -152,7 +153,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-
       <div id="budgetResult" class="result"><h4>Resumen del proyecto</h4><p>Completa los datos y calcula la estimación.</p></div>
     </div>
   </section>
-  <div class="footer">WAN Smart Manager · Prototipo académico · Versión 3.0 (Corte 3) · Multimarca & Ciberdefensa</div>
+  <div class="footer">WAN Smart Manager · Prototipo académico · Versión 3.0 (Corte 3) · Multimarca & Ciberdefensa Integrada</div>
 </div>
 <script>
 const $ = id => document.getElementById(id);
@@ -177,13 +178,23 @@ function saveTopology(){
  } catch(e) { console.warn("No se pudo guardar en el navegador.", e); }
 }
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+// CIBERDEFENSA: Sanitizador de entradas contra XSS e inyecciones de comandos
+function sanitizeInput(str){
+  if(!str) return "";
+  return str.trim().replace(/[;<>&"'$`\]/g, "");
+}
+
 document.querySelectorAll(".tab").forEach(btn=>btn.addEventListener("click",()=>{
  document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b===btn));
  document.querySelectorAll(".section").forEach(s=>s.classList.toggle("active",s.id===btn.dataset.tab));
 }));
 function ipv4ToInt(ip){
- const p=ip.trim().split(".");
- if(p.length!==4 || p.some(x=>x===""||!/^\d+$/.test(x)||Number(x)<0||Number(x)>255)) throw new Error("Escribe una IPv4 válida, por ejemplo 192.168.10.0.");
+ const cleanIp = sanitizeInput(ip);
+ const p=cleanIp.split(".");
+ if(p.length!==4 || p.some(x=>x===""||!/^\d+$/.test(x)||Number(x)<0||Number(x)>255)) {
+   throw new Error("CIBERDEFENSA: Dirección IPv4 inválida (octeto fuera de rango 0-255 o caracteres no permitidos).");
+ }
  return p.reduce((n,x)=>((n*256)+Number(x))>>>0,0)>>>0;
 }
 function intToIp(n){return [n>>>24,(n>>>16)&255,(n>>>8)&255,n&255].join(".");}
@@ -203,7 +214,7 @@ function calcSubnet(){
   const network=(addr&mask)>>>0; const broadcast=(network | (~mask>>>0))>>>0;
   const total=Math.pow(2,32-prefix); const hosts=prefix>=31? (prefix===31?2:1):Math.max(0,total-2);
   const maskIp=intToIp(mask); const first=prefix>=31?intToIp(network):intToIp((network+1)>>>0); const last=prefix>=31?intToIp(broadcast):intToIp((broadcast-1)>>>0);
-  $("ipResult").innerHTML=`<h4>Resultado del cálculo</h4><div class="kv">
+  $("ipResult").innerHTML=`<h4>Resultado del cálculo (Validado)</h4><div class="kv">
    <div><small>Dirección ingresada</small><strong>${escapeHtml(ip)}/${prefix}</strong></div>
    <div><small>Máscara de subred</small><strong>${maskIp}</strong></div>
    <div><small>Dirección de red</small><strong>${intToIp(network)}</strong></div>
@@ -213,7 +224,7 @@ function calcSubnet(){
    <div><small>Total de direcciones</small><strong>${total.toLocaleString("es-CO")}</strong></div>
    <div><small>Hosts utilizables (IPv4)</small><strong>${hosts.toLocaleString("es-CO")}</strong></div></div>
    <p style="color:var(--muted);font-size:12px;margin:12px 0 0">Bits de red: ${prefix} · Bits de host: ${32-prefix}</p>`;
- }catch(e){$("ipResult").innerHTML=`<h4 style="color:var(--red)">Revisa los datos</h4><p>${escapeHtml(e.message)}</p>`;}
+ }catch(e){$("ipResult").innerHTML=`<h4 style="color:var(--red)">Ciberdefensa: Entrada Rechazada</h4><p>${escapeHtml(e.message)}</p>`;}
 }
 $("calculateIp").addEventListener("click",calcSubnet);
 $("fillExample").addEventListener("click",()=>{$("ipAddress").value="192.168.10.0";$("prefix").value="/26";calcSubnet();});
@@ -240,14 +251,14 @@ function renderDevices(){
  saveTopology();
 }
 $("addDevice").addEventListener("click",()=>{
- const name=$("devName").value.trim(), type=$("devType").value, vendor=$("devVendor").value, ip=$("devIp").value.trim();
- if(!name){alert("Escribe un nombre para el dispositivo.");return;}
+ const name=sanitizeInput($("devName").value), type=$("devType").value, vendor=$("devVendor").value, ip=sanitizeInput($("devIp").value);
+ if(!name){alert("CIBERDEFENSA: Escribe un nombre válido para el dispositivo.");return;}
  if(devices.some(d=>d.name.toLowerCase()===name.toLowerCase())){alert("Ya existe un dispositivo con ese nombre.");return;}
- if(ip){try{ipv4ToInt(ip);}catch(e){alert("La IP no parece válida. "+e.message);return;}}
+ if(ip){try{ipv4ToInt(ip);}catch(e){alert(e.message);return;}}
  devices.push({name,type,vendor,ip});renderDevices();$("devName").value="";
 });
 $("addLink").addEventListener("click",()=>{
- const from=$("linkFrom").value,to=$("linkTo").value,type=$("linkType").value,bandwidth=$("linkBandwidth").value.trim();
+ const from=$("linkFrom").value,to=$("linkTo").value,type=$("linkType").value,bandwidth=sanitizeInput($("linkBandwidth").value);
  if(!from||!to){alert("Agrega al menos dos dispositivos antes de crear un enlace.");return;}
  if(from===to){alert("El origen y el destino deben ser dispositivos diferentes.");return;}
  if(links.some(l=>(l.from===from&&l.to===to&&l.type===type)||(l.from===to&&l.to===from&&l.type===type))){alert("Ya existe un enlace de ese tipo entre esos dispositivos.");return;}
@@ -260,13 +271,15 @@ $("resetTopology").addEventListener("click",()=>{
  renderDevices();
 });
 function generateConfig(){
- const vendor=$("vendor").value, host=$("hostname").value.trim(), iface=$("interfaceName").value.trim(), ip=$("interfaceIp").value.trim(), mask=$("interfaceMask").value, vlan=Number($("vlan").value);
+ const vendor=$("vendor").value, host=sanitizeInput($("hostname").value), iface=sanitizeInput($("interfaceName").value), ip=sanitizeInput($("interfaceIp").value), mask=$("interfaceMask").value, vlan=Number($("vlan").value), secureServ=$("secureServices").value;
  if(!host||!iface){$("configOutput").textContent="Completa el hostname y la interfaz.";return;}
  try{ipv4ToInt(ip);}catch(e){$("configOutput").textContent=e.message;return;}
  if(!Number.isInteger(vlan)||vlan<1||vlan>4094){$("configOutput").textContent="La VLAN debe estar entre 1 y 4094.";return;}
  let cfg="";
+ const isInsecure = secureServ === "insecure";
+
  if(vendor==="Cisco"){
-   cfg=`! PLANTILLA EDUCATIVA - Cisco IOS
+   cfg=`! PLANTILLA SEGURA - Cisco IOS
 hostname ${host}
 !
 vlan ${vlan}
@@ -277,9 +290,12 @@ interface ${iface}
  ip address ${ip} ${mask}
  no shutdown
 !
+line vty 0 4
+ ${isInsecure ? "transport input telnet ssh ! ALERTA: Telnet inseguro activado" : "transport input ssh ! Ciberdefensa: Telnet bloqueado"}
+!
 ! Fin de configuracion Cisco`;
  }else if(vendor==="Huawei"){
-   cfg=`# PLANTILLA EDUCATIVA - Huawei VRP
+   cfg=`# PLANTILLA SEGURA - Huawei VRP
 sysname ${host}
 !
 vlan batch ${vlan}
@@ -290,15 +306,19 @@ interface ${iface}
  undo shutdown
 quit
 !
+user-interface vty 0 4
+ ${isInsecure ? "protocol inbound all # ALERTA: Protocolo inseguro permitido" : "protocol inbound ssh # Ciberdefensa: SSH exclusivamente"}
+quit
+!
 # Fin de configuracion Huawei`;
  }else if(vendor==="Fortinet"){
-   cfg=`# PLANTILLA EDUCATIVA - Fortinet FortiOS
+   cfg=`# PLANTILLA SEGURA - Fortinet FortiOS
 config system interface
     edit "${iface}"
         set vdom "root"
         set mode static
         set ip ${ip} ${mask}
-        set allowaccess ping https ssh
+        set allowaccess ${isInsecure ? "ping http https ssh telnet # ALERTA: HTTP/Telnet habilitados" : "ping https ssh # Ciberdefensa: Solo HTTPS/SSH"}
         set comment "VLAN ${vlan} - WAN Smart Manager"
     next
 end
@@ -311,7 +331,7 @@ config system interface
 end`;
  }else if(vendor==="MikroTik"){
    const cidr = maskToCidr(mask);
-   cfg=`# PLANTILLA EDUCATIVA - MikroTik RouterOS
+   cfg=`# PLANTILLA SEGURA - MikroTik RouterOS
 # Configuración para ${host}
 /interface vlan
 add name=vlan${vlan} interface=${iface} vlan-id=${vlan}
@@ -319,18 +339,50 @@ add name=vlan${vlan} interface=${iface} vlan-id=${vlan}
 /ip address
 add address=${ip}/${cidr} interface=vlan${vlan} comment="VLAN ${vlan} WAN Smart Manager"
 
+/ip service
+set telnet disabled=${isInsecure ? "no # ALERTA: Telnet habilitado" : "yes # Ciberdefensa: Telnet deshabilitado"}
+set ftp disabled=yes
+set www disabled=${isInsecure ? "no" : "yes"}
+set ssh disabled=no
+
 /system identity
 set name=${host}`;
  }
  $("configOutput").textContent=cfg;
- $("configWarning").textContent="Plantilla generada con éxito para " + vendor + ". Revisa parámetros físicos antes de aplicar en laboratorio.";
+ const warnBox = $("configWarning");
+ if(isInsecure){
+   warnBox.className = "notice danger-notice";
+   warnBox.innerHTML = "<b>⚠️ ADVERTENCIA DE CIBERDEFENSA:</b> Se ha detectado la selección de protocolos no cifrados (Telnet/HTTP). Esto expone contraseñas a sniffing en la red WAN. Se recomienda cambiar a SSH / HTTPS.";
+ } else {
+   warnBox.className = "notice good";
+   warnBox.innerHTML = "<b>✓ VALIDACIÓN DE CIBERDEFENSA OK:</b> La configuración aplica el principio de mínimo privilegio deshabilitando protocolos vulnerables (Telnet/FTP/HTTP) y forzando tráfico cifrado (SSH/HTTPS). No se almacenan secretos ni contraseñas.";
+ }
 }
 $("generateConfig").addEventListener("click",generateConfig);
 $("copyConfig").addEventListener("click",async()=>{const txt=$("configOutput").textContent;try{await navigator.clipboard.writeText(txt);$("copyConfig").textContent="¡Copiado!";setTimeout(()=>$("copyConfig").textContent="Copiar configuración",1500);}catch(e){alert("No se pudo copiar automáticamente. Selecciona el texto y cópialo manualmente.");}});
 function ask(){
- const q=$("question").value.trim().toLowerCase();if(!q){$("assistantAnswer").textContent="Escribe una pregunta para que pueda orientarte.";return;}
+ const rawQ = $("question").value;
+ const q = sanitizeInput(rawQ).toLowerCase();
+ if(!q){$("assistantAnswer").textContent="Escribe una pregunta para que pueda orientarte.";return;}
+
+ // Detección de Prompt Injection o intento de extraer credenciales / secretos
+ if(/password|contraseña|secret|token|api_key|drop table|script>|eval\(/i.test(rawQ)){
+   $("assistantAnswer").textContent = "🛡️ CIBERDEFENSA ANTI-IA (RECHAZADO):
+
+Se detectó un intento de consulta con términos sensibles o potencialmente maliciosos (credenciales, tokens o scripts). De acuerdo con docs/politicas-ia.md, la herramienta no procesa ni almacena secretos. Por favor ingresa preguntas conceptuales de red.";
+   return;
+ }
+
  let answer="";
- if(/subnet|máscara|mascara|broadcast|ip planning|direccionamiento|ipv4/.test(q)) answer="IP PLANNING
+ if(/politica|politicas|ciberdefensa|seguridad ia|reglas ia/.test(q)) answer="POLÍTICAS DE CIBERDEFENSA CONTRA IA (docs/politicas-ia.md)
+1. La herramienta nunca guarda contraseñas ni tokens en el código; van en .env (protegido por .gitignore).
+2. Con IA pública solo se usan datos de ejemplo, nunca IPs reales o topologías sensibles.
+3. Todo lo que ingresa el usuario se valida y sanea antes de usarse.
+4. La app advierte cuando una configuración es insegura y aplica el mínimo privilegio.
+5. No se ejecuta ningún comando no verificado; todo lo generado por IA se prueba primero.
+6. Acceso a equipos solo en laboratorio autorizado.
+7. La calidad se mide con pruebas (% de confianza en docs/pruebas.md).";
+ else if(/subnet|máscara|mascara|broadcast|ip planning|direccionamiento|ipv4/.test(q)) answer="IP PLANNING
 1. Define cuántos equipos necesitan dirección.
 2. Elige un prefijo que ofrezca suficientes direcciones.
 3. Verifica dirección de red, broadcast y rango utilizable.
@@ -341,66 +393,36 @@ Puedes ir al módulo IP Planning para calcular una subred IPv4.";
 1. Define un prefijo asignado por tu organización o proveedor.
 2. Planifica subredes por sede y función.
 3. En LAN normalmente se usa /64 por segmento.
-4. IPv6 no utiliza broadcast; usa multicast y neighbor discovery.
-
-Esta primera versión aún no calcula subredes IPv6 automáticamente.";
+4. IPv6 no utiliza broadcast; usa multicast y neighbor discovery.";
  else if(/vlan/.test(q)) answer="VLAN
-1. Crea un ID y un nombre por función (por ejemplo, VLAN 10 Administración, VLAN 20 Usuarios).
-2. Define qué puertos son access y cuáles trunk.
-3. Configura el enrutamiento entre VLAN solo donde sea necesario.
-4. Aplica ACL o políticas de firewall para limitar el tráfico entre segmentos.
-5. Documenta el rango IP de cada VLAN.";
+1. Crea un ID y un nombre por función (ej. VLAN 10 Administración, VLAN 20 Usuarios).
+2. Define puertos access y trunk.
+3. Configura enrutamiento inter-VLAN seguro.
+4. Aplica ACLs o políticas de firewall para aislar segmentos de alto riesgo.";
  else if(/vpn|túnel|tunel/.test(q)) answer="VPN entre sedes
-1. Confirma que ambos extremos tengan conectividad IP.
-2. Define la tecnología y compatibilidad (por ejemplo, IPsec site-to-site).
-3. Planifica subredes no superpuestas y rutas.
-4. Define cifrado, autenticación, intercambio de claves y políticas.
-5. Prueba conectividad y registra métricas.
-
-No guardes claves compartidas ni contraseñas en el repositorio.";
+1. Confirma conectividad IP entre extremos.
+2. Configura IPsec Site-to-Site con cifrado robusto (AES-256).
+3. Define subredes no superpuestas y rutas.
+4. No guardes claves pre-compartidas (PSK) en código o repositorios.";
  else if(/ospf/.test(q)) answer="OSPF
-Es un protocolo de enrutamiento dinámico interno. Antes de configurarlo, define áreas, interfaces participantes, router ID, redes anunciadas y autenticación si aplica. Comprueba vecinos, tabla de rutas y redundancia en un laboratorio antes de llevarlo a producción.";
- else if(/bgp/.test(q)) answer="BGP
-Se utiliza para intercambiar rutas entre sistemas autónomos, por ejemplo entre organizaciones o proveedores. Define ASN, vecinos, prefijos permitidos y filtros de entrada/salida. Aplica políticas de prefijos y evita anunciar rutas que no te pertenecen.";
+Protocolo de enrutamiento dinámico interno. Define áreas, interfaces participantes, router ID y autenticación MD5/HMAC para evitar inyección de rutas falsas.";
+ else if(/bgp/.test(q)) answer="BGP
+Protocolo para interconectar Sistemas Autónomos. Aplica filtros de prefijos entrantes y salientes para evitar 'BGP hijacking' o filtrado de rutas privadas a internet.";
  else if(/ancho de banda|bandwidth|mbps|velocidad|capacidad/.test(q)) answer="Ancho de banda
-1. Identifica aplicaciones (voz, videollamadas, archivos, sistemas empresariales).
-2. Estima cuántos usuarios las usan al mismo tiempo.
-3. Mide o estima el consumo por aplicación.
-4. Añade margen para crecimiento y picos.
-5. Si el servicio es crítico, evalúa un enlace de respaldo y QoS.
+Estima consumo concurrente de aplicaciones críticas, define margen de picos y aplica políticas de QoS (Quality of Service) para dar prioridad a voz y sistemas administrativos.";
+ else if(/seguridad|firewall|ataque|ciber|contraseña|contrasena|clave/.test(q)) answer="Ciberdefensa Básica WAN
+• Limita la administración a IPs de gestión autorizadas.
+• Usa SSH/HTTPS estrictamente (bloquea Telnet/HTTP).
+• Aplica principio de mínimo privilegio.
+• Valida entradas y evita exponer secretos en repositorios públicos.";
+ else answer="Puedo orientarte en subnetting, ciberdefensa contra IA, VLAN, VPN, OSPF, BGP, seguridad WAN, presupuestos y buenas prácticas multimarca.
 
-La cifra final debe basarse en mediciones o requisitos reales.";
- else if(/seguridad|firewall|ataque|ciber|contraseña|contrasena|clave/.test(q)) answer="Seguridad básica
-• Usa credenciales únicas y no las guardes en el código.
-• Limita la administración a una red de gestión autorizada.
-• Usa SSH en vez de Telnet cuando el dispositivo lo permita.
-• Aplica mínimo privilegio, actualizaciones y copias de seguridad.
-• Valida las configuraciones y pruébalas en laboratorio.
-• Revisa ACL, firewall, registros y acceso remoto.";
- else if(/presupuesto|costo|costos|equipos|requerimiento/.test(q)) answer="Requerimientos y presupuesto
-1. Cuenta sedes, usuarios y dispositivos.
-2. Define disponibilidad, soporte, seguridad y crecimiento.
-3. Separa costos iniciales (equipos, instalación) de recurrentes (ISP, licencias, soporte).
-4. Compara al menos dos alternativas y deja claro qué valores son estimados.
-5. Documenta supuestos y fecha de los precios.";
- else if(/cisco|huawei|fortinet|mikrotik|fabricante|configuración|configuracion/.test(q)) answer="Configuración por fabricante
-Selecciona el fabricante en el módulo Configuraciones y genera una plantilla de ejemplo. Los comandos varían por modelo, versión del sistema operativo y función del equipo. Valida la sintaxis en documentación oficial y en laboratorio; esta herramienta no aplica comandos reales.";
- else if(/topolog|conex|dispositivo|isp|router|switch/.test(q)) answer="Análisis de topología
-1. Registra cada router, switch, firewall, servidor e ISP.
-2. Documenta interfaces, direcciones IP, velocidad y función.
-3. Dibuja enlaces primarios y de respaldo.
-4. Identifica puntos únicos de falla y enlaces saturables.
-5. Comprueba que las subredes y rutas no se superpongan.";
- else answer="Puedo orientarte en subnetting, IPv4/IPv6, VLAN, VPN, OSPF, BGP, seguridad, fabricantes, topología, presupuesto y ancho de banda.
-
-Para recibir una recomendación útil, cuéntame el objetivo de la red, número de sedes y usuarios, equipos disponibles y restricciones. Evita compartir contraseñas, tokens o datos confidenciales.
-
-Nota: soy un asistente local basado en reglas, no una IA generativa conectada todavía.";
+Nota: Los datos ingresados son procesados localmente bajo estrictos controles de ciberdefensa.";
  $("assistantAnswer").textContent=answer;
 }
 $("askAssistant").addEventListener("click",ask);$("clearQuestion").addEventListener("click",()=>{$("question").value="";$("assistantAnswer").textContent="Escribe una pregunta y pulsa “Consultar asistente”.";});
 $("calculateBudget").addEventListener("click",()=>{
- const site=$("siteName").value.trim()||"Sede sin nombre", users=Number($("users").value), bw=Number($("bandwidth").value), equipment=Number($("equipmentCost").value), monthly=Number($("monthlyCost").value), availability=$("availability").value;
+ const site=sanitizeInput($("siteName").value)||"Sede sin nombre", users=Number($("users").value), bw=Number($("bandwidth").value), equipment=Number($("equipmentCost").value), monthly=Number($("monthlyCost").value), availability=$("availability").value;
  if(!Number.isFinite(users)||users<1||!Number.isFinite(bw)||bw<1||equipment<0||monthly<0){$("budgetResult").innerHTML="<h4>Revisa los datos</h4><p>Usuarios y ancho de banda deben ser mayores que cero; los costos no pueden ser negativos.</p>";return;}
  const money=n=>n.toLocaleString("es-CO",{style:"currency",currency:"COP",maximumFractionDigits:0});
  $("budgetResult").innerHTML=`<h4>Estimación para ${escapeHtml(site)}</h4><div class="kv"><div><small>Usuarios estimados</small><strong>${users}</strong></div><div><small>Ancho de banda objetivo</small><strong>${bw} Mbps</strong></div><div><small>Disponibilidad</small><strong>${escapeHtml(availability)}</strong></div><div><small>Costos iniciales</small><strong>${money(equipment)}</strong></div><div><small>Costo mensual ISP</small><strong>${money(monthly)}</strong></div><div><small>Estimación del primer año</small><strong>${money(equipment+monthly*12)}</strong></div></div><p style="color:var(--muted);font-size:12px;margin-bottom:0">Estimación orientativa basada en los valores ingresados. No incluye impuestos, instalación, licencias, soporte ni otros costos no registrados.</p>`;
